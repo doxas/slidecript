@@ -12,6 +12,7 @@ var paths = {
     'mdDir': 'markdown/*.md',
     'htmlDir': 'html/**',
     'jsDir': 'js/*.js',
+    'libDir': 'lib/*.js',
     'cssDir': 'style/*.css',
     'imageDir': 'image/**',
     'destDir': 'build/'
@@ -81,6 +82,7 @@ gulp.task('concatjs', function() {
 
 // other task
 gulp.task('copy', function() {
+    gulp.src(paths.libDir).pipe(gulp.dest(paths.destDir));
     gulp.src(paths.cssDir).pipe(gulp.dest(paths.destDir));
     gulp.src(paths.imageDir).pipe(gulp.dest(paths.destDir + '/image'));
     return browserSync.reload();

@@ -27,11 +27,35 @@ paragraph
 ---
 
 ```
-codeblock
-    codeblock
+#version 300 es
+layout (location = 0) in vec3 position;
 
-    codeblock
-    codeblock
+layout (std140) uniform matrix {
+    mat4 mvp;
+} mat;
+
+uniform float scale;
+
+void main(){
+    gl_Position = mat.mvp * vec4(position * scale, 1.0);
+}
+```
+
+---
+
+```
+// 頂点シェーダとフラグメントシェーダの生成
+var v_shader = create_shader('vs');
+var f_shader = create_shader('fs');
+
+// プログラムオブジェクトの生成とリンク
+var prg = create_program(v_shader, f_shader);
+
+// attributeLocationの取得
+var attLocation = gl.getAttribLocation(prg, 'position');
+
+// attributeの要素数(この場合は xyz の3要素)
+var attStride = 3;
 ```
 
 ---
