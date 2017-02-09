@@ -19,6 +19,7 @@ var paths = {
 
 // module of me
 var app = require('./app/index.js');
+var data;
 gulp.task('app', function(){
     var fs = require('fs');
     fs.exists('build', function(exists){
@@ -28,7 +29,23 @@ gulp.task('app', function(){
         if(!exists){fs.mkdirSync('build/image', 0777);}
     })
     var source = fs.readFileSync('html/header.html', 'utf-8');
-    source += app.parse(fs.readFileSync('markdown/document.md', 'utf-8'));
+    data = app.parse(fs.readFileSync('markdown/document.md', 'utf-8'));
+    if(data.title !== ''){
+        source = source.replace(/@title@/g, data.title);
+        if(data.title2 === ''){
+            source = source.replace(/@title2@/, data.title);
+        }
+    }
+    if(data.title2 !== ''){
+        source = source.replace(/@title2@/, data.title2);
+    }
+    if(data.subtitle !== ''){
+        source = source.replace(/@subtitle@/, data.subtitle);
+    }
+    if(data.author !== ''){
+        source = source.replace(/@author@/, data.author);
+    }
+    source += data.dest;
     source += fs.readFileSync('html/footer.html', 'utf-8');
     fs.writeFile(paths.destDir + 'index.html', source);
 });

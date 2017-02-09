@@ -1,20 +1,49 @@
 
 module.exports = {
-    parse: function(md){
+    parse: function(markdown){
         var i, j, k, l;
-        var tag, content, source, dest, page;
-        if(md == null || typeof md !== 'string'){return null;}
-        source = md.replace(/\t/g, '');
+        var tag, content, md, source, head, dest, page;
+        var title, title2, subtitle, author;
+        title = title2 = subtitle = author = '';
+        if(markdown == null || typeof markdown !== 'string'){return null;}
+        // replace tab string and asterisk
+        md = markdown.replace(/\t/g, '');
         while(md.match(/\*\*[^\*]+\*\*/)){
             md = md.replace(/\*\*/, '<strong>');
             md = md.replace(/\*\*/, '</strong>');
         }
-        source = md.match(/\*[^\*]+\*/g);
-        if(md.match(/\r\n/)){
-            source = md.split(/\r\n/);
+        // split head
+        md = md.split(/\^\^\^/);
+        if(md == null || md.length !== 2){return null;}
+        head = md[0];
+        source = md[1];
+        // replace return string
+        if(head.match(/\r\n/)){
+            head = head.split(/\r\n/);
+            source = source.split(/\r\n/);
         }else{
-            source = md.split(/\n/);
+            head = head.split(/\n/);
+            source = source.split(/\n/);
         }
+        // parse head
+        for(i = 0, j = head.length; i < j; i++){
+            switch(true){
+                case (head[i].match(/^#{1} /) != null):
+                    title = head[i].replace(/^#{1} /, '');
+                    if(title2 === ''){title2 = title;}
+                    break;
+                case (head[i].match(/^#{2} /) != null):
+                    title2 = head[i].replace(/^#{2} /, '');
+                    break;
+                case (head[i].match(/^#{3} /) != null):
+                    subtitle = head[i].replace(/^#{3} /, '');
+                    break;
+                case (head[i].match(/^#{5} /) != null):
+                    author = head[i].replace(/^#{5} /, '');
+                    break;
+            }
+        }
+        // parse source
         if(source.length === 0){return null;}
         dest = [];
         for(i = 0, j = source.length; i < j; i++){
@@ -114,6 +143,12 @@ module.exports = {
             }
         }
         dest[dest.length] = '</div>\n';
-        return '\n<div class="page">\n' + dest.join('') + '\n';
+        return {
+            title: title,
+            title2: title2,
+            subtitle: subtitle,
+            author: author,
+            dest: '\n<div class="page">\n' + dest.join('') + '\n'
+        };
     }
 };
