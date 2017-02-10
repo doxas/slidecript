@@ -84,7 +84,7 @@
 
     // input label setting
     function answer(){
-        var e;
+        var e, s;
         var ans = [
             1, 1, 1, 1, 1,
             1, 1, 1, 1, 1
@@ -101,24 +101,25 @@
                 console.log('question ' + (i + 1) + ' => ×');
             }
         }
+        s = ansCount + ' / ' + question;
         switch(true){
             case ansCount <= 2:
-                alert('かなり頑張って復習しないとヤバいかも！？');
+                alert(s + '\n' + 'かなり頑張って復習しないとヤバいかも！？');
                 break;
             case ansCount <= 4:
-                alert('若干あいまいな部分が多いのかも……復習しておきましょう！');
+                alert(s + '\n' + '若干あいまいな部分が多いのかも……復習しておきましょう！');
                 break;
             case ansCount <= 6:
-                alert('まずまず理解できているみたい。ポイントを絞って再復習！');
+                alert(s + '\n' + 'まずまず理解できているみたい。ポイントを絞って再復習！');
                 break;
             case ansCount < 10:
-                alert('かなり高い理解度です！　不安なところは復習しておきましょう！');
+                alert(s + '\n' + 'かなり高い理解度です！　不安なところは復習しておきましょう！');
                 break;
             default :
-                alert('perfect !!!');
+                alert(s + '\n' + 'perfect !!!');
                 break;
         }
-        console.log(ansCount + ' / ' + question);
+        console.log(s);
     }
 
     function paddingZero(num){
