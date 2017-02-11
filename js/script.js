@@ -6,7 +6,8 @@
     var question = 10;
 
     window.onload = function(){
-        var a, e;
+        var a, e, f;
+        var i, j;
         a = document.getElementById('content').childNodes;
         for(var i = 0, len = a.length; i < len; i++){
             if(a[i].nodeName !== '#text'){
@@ -14,19 +15,55 @@
             }
         }
         pagesCount = pages.length;
-        window.addEventListener('keydown', keyDown, true);
+        window.addEventListener('keydown', keyDown, false);
         e = document.getElementById('prev');
-        e.addEventListener('click', function(){pageChange(true);}, true);
+        e.addEventListener('click', function(){pageChange(true);}, false);
         e = document.getElementById('next');
-        e.addEventListener('click', function(){pageChange(false);}, true);
+        e.addEventListener('click', function(){pageChange(false);}, false);
         pageChange(true, 0);
         e = document.getElementById('total');
-        e.innerText = pagesCount;
+        e.textContent = pagesCount;
+        f = function(){
+            var e = document.getElementById('layer');
+            e.className = e.className === '' ? 'visible' : '';
+        };
+        e = document.getElementById('icon');
+        e.addEventListener('click', f, false);
+        e = document.getElementById('layer');
+        e.addEventListener('click', f, false);
+
+        // agenda setting
+        if(window.contentList != null && window.contentList !== ''){
+            i = JSON.parse(window.contentList);
+            if(i != null && i.length > 0){
+                e = document.getElementById('menu');
+                e.appendChild(genAgenda('home', -1));
+                for(j = 0; j < i.length; ++j){
+                    e.appendChild(genAgenda(i[j].content, i[j].count));
+                }
+            }
+        }
+        function genAgenda(content, count){
+            var k, l;
+            k = document.createElement('div');
+            k.className = 'line';
+            l = document.createElement('div');
+            l.textContent = content;
+            k.appendChild(l);
+            l = document.createElement('div');
+            l.className = 'arrow';
+            l.textContent = '▷';
+            k.appendChild(l);
+            k.addEventListener('click', (function(index){return function(){
+                pageChange(false, index + 1);
+            };})(count), false);
+            return k;
+        }
+
+        // input label setting
         e = document.getElementById('ansButton');
         if(!e){return;}
         e.addEventListener('click', function(){answer();}, true);
-
-        // input label setting
         var questionCount = 4;
         for(var i = 0; i < question; i++){
             var j = paddingZero(i + 1);
@@ -79,7 +116,7 @@
         e = document.getElementById('progress');
         e.style.width = parseInt((activePage + 1) / pagesCount * 100) + '%';
         e = document.getElementById('count');
-        e.innerText = activePage + 1;
+        e.textContent = activePage + 1;
     }
 
     // input label setting

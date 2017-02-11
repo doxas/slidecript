@@ -46,6 +46,11 @@ gulp.task('app', function(){
     if(data.author !== ''){
         source = source.replace(/@author@/, data.author);
     }
+    if(data.list != null && data.list.length > 0){
+        source = source.replace(/@list@/, JSON.stringify(data.list));
+    }else{
+        source = source.replace(/@list@/, '');
+    }
     source += data.dest;
     source += fs.readFileSync('html/footer.html', 'utf-8');
     fs.writeFile(paths.destDir + 'index.html', source);

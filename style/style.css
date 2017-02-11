@@ -287,6 +287,7 @@ label:hover {
     cursor: pointer;
     text-shadow: 0px 0px 3px white;
     transition: color 0.2s linear, text-shadow 0.2s linear;
+    user-select: none;
 }
 
 #prev:hover, #next:hover {
@@ -341,7 +342,7 @@ label:hover {
     transition: opacity 0.5s ease-out;
 }
 
-#layer.active {
+#layer.visible {
     opacity: 1.0;
     z-index: 2;
     transition: opacity 0.5s ease-out;
@@ -351,9 +352,9 @@ label:hover {
     background-color: rgba(0, 0, 0, 0.5);
     border: 2px solid silver;
     border-radius: 5px;
-    width: calc(100% - 160px);
-    height: calc(100% - 120px);
-    margin: 60px;
+    width: calc(100% - 240px);
+    height: calc(100% - 200px);
+    margin: 100px;
     padding: 0px 20px;
     overflow: auto;
 }
@@ -477,6 +478,7 @@ label:hover {
         max-width: 50px;
         height: 50px;
         cursor: pointer;
+        user-select: none;
     }
     #navi {
         width: 100%;
@@ -494,7 +496,7 @@ label:hover {
     #content {
         line-height: 1.25;
         width: 100%;
-        height: 100%;
+        height: calc(100% - 105px);
     }
     #author {
         margin: 0px 10px;
@@ -505,9 +507,10 @@ label:hover {
         background-color: rgba(0, 0, 0, 0.5);
         border: 2px solid silver;
         border-radius: 5px;
-        width: calc(100% - 80px);
-        height: calc(100% - 120px);
-        margin: 60px 30px;
+        font-size: medium;
+        width: calc(100% - 120px);
+        height: calc(100% - 180px);
+        margin: 80px 50px;
         padding: 10px;
         overflow: auto;
     }

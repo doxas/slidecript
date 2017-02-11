@@ -2,7 +2,7 @@
 module.exports = {
     parse: function(markdown){
         var i, j, k, l;
-        var tag, content, md, source, head, dest, page;
+        var tag, content, md, source, head, dest, page, list, listTitle, count;
         var title, title2, subtitle, author;
         title = title2 = subtitle = author = '';
         if(markdown == null || typeof markdown !== 'string'){return null;}
@@ -46,6 +46,9 @@ module.exports = {
         // parse source
         if(source.length === 0){return null;}
         dest = [];
+        list = [];
+        count = 0;
+        listTitle = '';
         for(i = 0, j = source.length; i < j; i++){
             while(source[i].match(/`[^`]+`/)){
                 source[i] = source[i].replace(/`/, '<code>');
@@ -71,10 +74,17 @@ module.exports = {
                         tag = 'h' + (k[0].length - k[0].replace(/#/g, '').length);
                         content = source[i].replace(/^#{1,6} /, '');
                         dest[i] = '\t<' + tag + '>' + content + '</' + tag + '>\n';
+                        if(source[i].match(/^#{4} /) != null){
+                            if(content !== '' && content !== listTitle){
+                                listTitle = content;
+                                list.push({content: content, count: count});
+                            }
+                        }
                         break;
                     // separator
                     case (source[i].match(/^--- *$/) != null):
                         dest[i] = '</div>\n<div class="page">\n';
+                        count++;
                         break;
                     // code block
                     case (source[i].match(/^``` *$/) != null):
@@ -148,6 +158,7 @@ module.exports = {
             title2: title2,
             subtitle: subtitle,
             author: author,
+            list: list,
             dest: '\n<div class="page">\n' + dest.join('') + '\n'
         };
     }

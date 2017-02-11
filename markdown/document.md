@@ -4,7 +4,7 @@
 ##### doxas
 ^^^
 
-#### test title
+#### image test
 
 paragraparagraparagraparagra*parag*rapppppparagraph
 
@@ -13,6 +13,8 @@ paragraparagraparagraparagra**iparag**rapppppparagraph
 ![](sample.png)
 
 ---
+
+#### paragraph test
 
 paragraph`code`paragraph
 
@@ -25,6 +27,8 @@ paragraph
 * list
 
 ---
+
+#### codeblock test
 
 ```
 #version 300 es
@@ -43,6 +47,8 @@ void main(){
 
 ---
 
+#### codeblock test
+
 ```
 // 頂点シェーダとフラグメントシェーダの生成
 var v_shader = create_shader('vs');
@@ -60,13 +66,15 @@ var attStride = 3;
 
 ---
 
+#### blockquote test
+
 paragraph
 
 --blockquote--
 
 ---
 
-#### question 1
+#### webgl quiz
 
 what is this?
 
@@ -77,7 +85,7 @@ what is this?
 
 ---
 
-#### question 2
+#### webgl quiz
 
 what is this?
 
@@ -88,7 +96,7 @@ what is this?
 
 ---
 
-#### question 3
+#### webgl quiz
 
 what is this?
 
@@ -99,7 +107,7 @@ what is this?
 
 ---
 
-#### question 4
+#### webgl quiz
 
 what is this?
 
@@ -110,7 +118,7 @@ what is this?
 
 ---
 
-#### question 5
+#### webgl quiz
 
 what is this?
 
@@ -121,7 +129,7 @@ what is this?
 
 ---
 
-#### question 6
+#### webgl quiz
 
 what is this?
 
@@ -132,7 +140,7 @@ what is this?
 
 ---
 
-#### question 7
+#### webgl quiz
 
 what is this?
 
@@ -143,7 +151,7 @@ what is this?
 
 ---
 
-#### question 8
+#### webgl quiz
 
 what is this?
 
@@ -154,7 +162,7 @@ what is this?
 
 ---
 
-#### question 9
+#### webgl quiz
 
 what is this?
 
@@ -165,7 +173,7 @@ what is this?
 
 ---
 
-#### question 10
+#### webgl quiz
 
 what is this?
 
@@ -176,7 +184,7 @@ what is this?
 
 ---
 
-#### 結果はいかに！？
+#### how did it go?
 
 <div id="ansButton">答え合わせ</div>
 
